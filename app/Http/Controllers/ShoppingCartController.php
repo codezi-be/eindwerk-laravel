@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\DiscountCode;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ShoppingCartController extends Controller
 {
@@ -14,10 +16,11 @@ class ShoppingCartController extends Controller
         // Zorg ervoor dat je de juiste velden bij de relatie in het User model meegeeft (zie documentatie)
         // https://laravel.com/docs/9.x/eloquent-relationships#retrieving-intermediate-table-columns
         // Zorg ook dat de prijs berekening in het "cart-item" klopt.
-
+        
+        
 
         // Zoek de producten van de ingelogde gebruiker op.
-        $products = Product::take(4)->get();
+        $products = Auth::user()->cart()->get();
 
 
         $shipping = 3.9;
@@ -25,9 +28,13 @@ class ShoppingCartController extends Controller
         // Gebruik de "products" relatie op het user model (en gegevens de pivot table) om de producten te overlopen
         // en de volledige prijs van de winkelkar te berekenen.
         $subtotal = 0;
+        foreach ($products as $product) {
+            $subtotal += $product->pivot->quantity * $product->price;
+        }
 
         // Bereken de verzendkosten van 3.9eur bij het totaal
         $total = 0;
+        $total = $subtotal + $shipping;
 
         // BONUS: Als de kortingscode bestaat in de sessie, zoek deze op in de databank en pas de korting toe op de berekening.
         // De kortingscode kan je dan ook naar de view hieronder doorsturen.
@@ -53,6 +60,18 @@ class ShoppingCartController extends Controller
         // De size en quantity gegevens uit het formulier voeg je toe aan de "pivot" table (zie documentatie link)
         // https://laravel.com/docs/9.x/eloquent-relationships#attaching-detaching
 
+        $user = Auth::user();
+        $ifexists = $user->cart()->where('products.id', $product->id)->exists();
+
+        if ($ifexists) {
+            return redirect()->route('cart');
+        }        
+
+        $user->cart()->attach($product->id, [
+            'size' => $request->size,
+            'quantity' => $request->quantity
+        ]);
+
         return redirect()->route('cart');
     }
 
@@ -60,12 +79,21 @@ class ShoppingCartController extends Controller
         // "Detach" het product van de ingelogde gebruiker
         // https://laravel.com/docs/9.x/eloquent-relationships#attaching-detaching
 
+        $user = Auth::user();
+        $user->cart()->detach($product->id);
+
         return redirect()->route('cart');
     }
 
     public function update(Request $request, Product $product) {
         // Update de gegevens van de pivot table met het product id
         // https://laravel.com/docs/9.x/eloquent-relationships#updating-a-record-on-the-intermediate-table
+
+        $user = Auth::user();
+        $user->cart()->updateExistingPivot($product->id, [
+            'size' => $request->size,
+            'quantity' => $request->quantity
+        ]);
 
         return redirect()->route('cart');
     }
