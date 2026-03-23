@@ -15,6 +15,10 @@ class OrdersController extends Controller
         // Valideer het formulier zodat alle velden verplicht zijn.
         // Vul het formulier terug in, en toon de foutmeldingen.
 
+        $validated = $request->validate([
+            TODO:
+        ])
+
         // Maak een nieuw "order" met de gegevens uit het formulier in de databank
         // Zorg ervoor dat hett order gekoppeld is aan de ingelogde gebruiker.
 
