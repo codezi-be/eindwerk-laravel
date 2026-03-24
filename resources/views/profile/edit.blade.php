@@ -17,7 +17,7 @@
                 <div class="flex flex-col">
                     <label class="text-gray-500" for="voornaam">E-mailadres: *</label>
                     <input name="email" value="{{ old('email') }}" type="email" class="bg-white border border-gray-500 px-4 py-2">
-                    <p class="text-red-500">Dit is een foutmelding.</p>
+                    <p class="text-red-500">{{ $errors->first('email') }}</p>
                 </div>
 
                 <div>
@@ -36,13 +36,13 @@
                 <div class="flex flex-col">
                     <label class="text-gray-500" for="voornaam">Nieuw wachtwoord: *</label>
                     <input name="password" type="password" class="bg-white border border-gray-500 px-4 py-2">
-                    <p class="text-red-500">Dit is een foutmelding.</p>
+                    <p class="text-red-500">{{ $errors->first('password') }}</p>
                 </div>
 
                 <div class="flex flex-col">
                     <label class="text-gray-500" for="voornaam">Confirmeer nieuw wachtwoord: *</label>
                     <input name="password_confirmation" type="password" class="bg-white border border-gray-500 px-4 py-2">
-                    <p class="text-red-500">Dit is een foutmelding.</p>
+                    <p class="text-red-500">{{ $errors->first('password') }}</p>
                 </div>
 
                 <div>

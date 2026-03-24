@@ -15,10 +15,12 @@
         <div class="flex gap-4 text-xl items-center">
             <a href="{{ route('profile') }}"><i class="fa-solid fa-user"></i></a>
             <a href="{{ route('favorites') }}"><i class="fa-solid fa-heart"></i></a>
-            <a href="{{ route('cart') }}" class="bg-gray-200 px-4 py-1 rounded-full">
-                <i class="fa-solid fa-cart-shopping"></i>
-                <span>3 items</span>
-            </a>
-        </div>
+                @auth
+                    <a href="{{ route('cart') }}" class="bg-gray-200 px-4 py-1 rounded-full">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span>{{ auth()->user()->cart->count() }} items</span>
+                    </a>
+                @endauth
+            </div>
     </div>
 </header>
