@@ -11,7 +11,7 @@
     </div>
 
     <div class="">
-        <h1 class="text-2xl font-semibold mb-4">Bestelling van 14 May 2020</h1>
+        <h1 class="text-2xl font-semibold mb-4">Bestelling van {{ $order->created_at->isoFormat('Do MMMM YYYY') }}</h1>
         <p class="text-gray-500 text-lg">{{ $products->count() }} producten</p>
 
         {{-- Indien kortingscode gekoppeld aan het order --}}
