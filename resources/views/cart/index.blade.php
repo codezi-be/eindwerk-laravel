@@ -7,7 +7,7 @@
         <div class="col-span-3 grid gap-4 content-start">
             <div class="bg-white p-4">
                 <h1 class="text-2xl font-semibold">Shopping cart</h1>
-                <p class="text-gray-500 text-lg">{{ $products->count() }} producten</p>
+                <p class="text-gray-500 text-lg">{{ $itemCount }} producten</p>
 
                 <div class="grid gap-4 mt-4">
                     @foreach($products as $product)

@@ -28,8 +28,10 @@ class ShoppingCartController extends Controller
         // Gebruik de "products" relatie op het user model (en gegevens de pivot table) om de producten te overlopen
         // en de volledige prijs van de winkelkar te berekenen.
         $subtotal = 0;
+        $itemCount = 0;
         foreach ($products as $product) {
             $subtotal += $product->pivot->quantity * $product->price;
+            $itemCount += $product->pivot->quantity;
         }
 
         // Bereken de verzendkosten van 3.9eur bij het totaal
@@ -49,7 +51,8 @@ class ShoppingCartController extends Controller
             'subtotal' => $subtotal,
             'total' => $total,
             'discountCode' => $discountCode,
-            'discountAmount' => $discountAmount
+            'discountAmount' => $discountAmount,
+            'itemCount' => $itemCount
         ]);
     }
 
