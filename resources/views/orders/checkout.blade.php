@@ -13,35 +13,35 @@
             <div class="flex flex-col">
                 <label class="text-gray-500" for="voornaam">Voornaam: *</label>
                 <input name="voornaam" type="text" class="bg-white border border-gray-500 px-4 py-2">
-                <p class="text-red-500">Dit is een foutmelding.</p>
+                <p class="text-red-500">{{ $errors->first('voornaam') }}</p>
             </div>
             <div class="flex flex-col">
                 <label class="text-gray-500" for="achternaam">Achternaam: *</label>
-                <input name="naam" type="text" class="bg-white border border-gray-500 px-4 py-2">
-                <p class="text-red-500">Dit is een foutmelding.</p>
+                <input name="achternaam" type="text" class="bg-white border border-gray-500 px-4 py-2">
+                <p class="text-red-500">{{ $errors->first('achternaam') }}</p>
             </div>
             <div class="grid grid-cols-5 gap-4">
                 <div class="flex flex-col col-span-4">
                     <label class="text-gray-500" for="straat">Straat: *</label>
                     <input name="straat" type="text" class="bg-white border border-gray-500 px-4 py-2">
-                    <p class="text-red-500">Dit is een foutmelding.</p>
+                    <p class="text-red-500">{{ $errors->first('straat') }}</p>
                 </div>
                 <div class="flex flex-col">
                     <label class="text-gray-500" for="huisnummer">Huisnummer: *</label>
                     <input name="huisnummer" type="text" class="bg-white border border-gray-500 px-4 py-2">
-                    <p class="text-red-500">Dit is een foutmelding.</p>
+                    <p class="text-red-500">{{ $errors->first('huisnummer') }}</p>
                 </div>
             </div>
             <div class="grid grid-cols-5 gap-4">
                 <div class="flex flex-col">
                     <label class="text-gray-500" for="postcode">Postcode: *</label>
                     <input name="postcode" type="text" class="bg-white border border-gray-500 px-4 py-2">
-                    <p class="text-red-500">Dit is een foutmelding.</p>
+                    <p class="text-red-500">{{ $errors->first('postcode') }}</p>
                 </div>
                 <div class="flex flex-col col-span-4">
                     <label class="text-gray-500" for="woonplaats">Woonplaats: *</label>
                     <input name="woonplaats" type="text" class="bg-white border border-gray-500 px-4 py-2">
-                    <p class="text-red-500">Dit is een foutmelding.</p>
+                    <p class="text-red-500">{{ $errors->first('woonplaats') }}</p>
                 </div>
             </div>
             <div>

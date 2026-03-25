@@ -9,5 +9,5 @@
             <i class="fa-solid fa-circle-check"></i>
         </button>
     </form>
-    <p class="text-red-500">Dit is een foutmelding.</p>
+    <p class="text-red-500">{{ $errors->first('code') }}</p>
 </div>
